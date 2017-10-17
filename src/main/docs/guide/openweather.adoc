@@ -10,7 +10,4 @@ After you register, you get an API Key. You will need an API key to interact wit
 
 image::apiKey.png[]
 
-INFO: the API key may take several minutes to become active. 
-
-
-
+TIP: the API key may take several minutes to become active.

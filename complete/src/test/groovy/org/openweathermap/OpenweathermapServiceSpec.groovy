@@ -16,7 +16,7 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
         String countryCode = 'uk'
         String appid = 'XXXXX'
         ersatz.expectations {
-            get('/data/2.5/weather') { // <1> 
+            get('/data/2.5/weather') { // <1>
                 query('q', "${city},${countryCode}")
                 query('appid', appid)
                 called(1) // <2>
@@ -25,7 +25,6 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
                 }
             }
         }
-        ersatz.start()
         service.openWeatherUrl = ersatz.httpUrl // <4>
         service.appid = appid
 
@@ -62,7 +61,6 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
                 }
             }
         }
-        ersatz.start()
         service.openWeatherUrl = ersatz.httpUrl
         service.appid = appid
 
