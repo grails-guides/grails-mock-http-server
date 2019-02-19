@@ -49,11 +49,16 @@ class OpenweathermapService implements GrailsConfigurationAware {
         if ( unitParam ) {
             uri += "&units=${unitParam}"
         }
-        HttpResponse<Map> resp = client.toBlocking().exchange(HttpRequest.GET(uri), Map)
-        if ( resp.status == HttpStatus.OK && resp.body() ) {
-            return OpenweathermapParser.currentWeatherFromJSONElement(new JSONObject(resp.body())) // <2>
+
+        try {
+            HttpResponse<Map> resp = client.toBlocking().exchange(HttpRequest.GET(uri), Map)
+            if ( resp.status == HttpStatus.OK && resp.body() ) {
+                return OpenweathermapParser.currentWeatherFromJSONElement(new JSONObject(resp.body())) // <2>
+            }
+        } catch (Exception e) {
+            return null // <3>
         }
-        null // <3>
+
     }
 
   /**
