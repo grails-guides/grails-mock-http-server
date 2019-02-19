@@ -5,9 +5,11 @@ import grails.config.Config
 import grails.core.support.GrailsConfigurationAware
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
+import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
+import org.grails.web.json.JSONObject
 
 
 //end::packageAndImports[]
@@ -47,9 +49,9 @@ class OpenweathermapService implements GrailsConfigurationAware {
         if ( unitParam ) {
             uri += "&units=${unitParam}"
         }
-        HttpResponse<String> resp = client.toBlocking().exchange(HttpRequest.GET("uri"), String)
-        if ( resp.statusCode.value() == 200 && resp.json ) {
-            return OpenweathermapParser.currentWeatherFromJSONElement(restResponse.json) // <2>
+        HttpResponse<Map> resp = client.toBlocking().exchange(HttpRequest.GET(uri), Map)
+        if ( resp.status == HttpStatus.OK && resp.body() ) {
+            return OpenweathermapParser.currentWeatherFromJSONElement(new JSONObject(resp.body())) // <2>
         }
         null // <3>
     }
