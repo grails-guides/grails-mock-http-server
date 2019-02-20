@@ -1,7 +1,7 @@
-The first step is to add a HTTP client library to our project. Add the next dependency: 
+The first step is to add the Micronaut HTTP client library to our project. Add the next dependency:
 
 [source, groovy]
 .build.gradle
 ----
-include::{sourcedir}/build.gradle[tag=datastore-rest-client]
+include::{sourcedir}/build.gradle[tag=micronaut-http-client]
 ----
