@@ -79,6 +79,7 @@ dependencies {
     //end::micronaut-http-client[]
     //tag::ersatz[]
     testCompile 'com.stehno.ersatz:ersatz:1.9.0'
+    testCompile 'io.undertow:undertow-core:2.0.13.Final'
     //end::ersatz[]
 }
 
