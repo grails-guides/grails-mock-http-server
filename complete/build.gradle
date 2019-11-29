@@ -75,7 +75,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-chrome-driver:3.12.0"
     testRuntime "org.seleniumhq.selenium:selenium-firefox-driver:3.12.0"
     //tag::micronaut-http-client[]
-    compile "io.micronaut:micronaut-http-client:1.0.4"
+    compile "io.micronaut:micronaut-http-client"
     //end::micronaut-http-client[]
     //tag::ersatz[]
     testCompile 'com.stehno.ersatz:ersatz:1.5.0'
