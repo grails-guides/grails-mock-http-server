@@ -9,6 +9,7 @@ import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
+import io.micronaut.http.uri.UriBuilder
 import org.grails.web.json.JSONObject
 
 
@@ -40,25 +41,25 @@ class OpenweathermapService implements GrailsConfigurationAware {
         currentWeather(cityName, countryCode, units)
     }
 
-
     @CompileDynamic
     CurrentWeather currentWeather(String cityName, String countryCode, Unit unit = Unit.Standard) {
         HttpClient client = HttpClient.create(openWeatherUrl.toURL())
-        String uri = "/data/2.5/weather?q=${cityName},${countryCode}&appid=${appid}"
+        UriBuilder uriBuilder = UriBuilder.of('/data/2.5/weather')
+                .queryParam('q', "${cityName},${countryCode}".toString())
+                .queryParam('appid', openweathermapConfiguration.appid)
         String unitParam = unitParameter(unit)
-        if ( unitParam ) {
-            uri += "&units=${unitParam}"
+        if (unitParam) {
+            uriBuilder = uriBuilder.queryParam('units', unitParam)
         }
-
         try {
-            HttpResponse<Map> resp = client.toBlocking().exchange(HttpRequest.GET(uri), Map)
+            HttpRequest request = HttpRequest.GET(uriBuilder.build())
+            HttpResponse<Map> resp = client.toBlocking().exchange(request, Map)
             if ( resp.status == HttpStatus.OK && resp.body() ) {
                 return OpenweathermapParser.currentWeatherFromJSONElement(new JSONObject(resp.body())) // <2>
             }
         } catch (Exception e) {
             return null // <3>
         }
-
     }
 
   /**
