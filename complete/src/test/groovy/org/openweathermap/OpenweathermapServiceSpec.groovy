@@ -27,7 +27,7 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
                 }
             }
         }
-        service.openWeatherUrl = ersatz.httpUrl // <4>
+        service.setupHttpClient(ersatz.httpUrl) // <4>
         service.appid = appid
 
         when:
@@ -76,7 +76,7 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
                 }
             }
         }
-        service.openWeatherUrl = ersatz.httpUrl
+        service.setupHttpClient(ersatz.httpUrl)
         service.appid = appid
 
         when:
@@ -84,7 +84,7 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
 
         then:
         currentWeather
-        currentWeather.weatherList[0].main == 'Clouds'
+
         currentWeather.cityName == 'London'
         currentWeather.code == 200
         currentWeather.cityId == 2643743
@@ -93,10 +93,12 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
         currentWeather.main.humidity == 53
         currentWeather.main.tempMin == 19
         currentWeather.main.tempMax == 22
-        currentWeather.weatherList[0].id == 803
-        currentWeather.weatherList[0].main == 'Clouds'
-        currentWeather.weatherList[0].description == 'broken clouds'
-        currentWeather.weatherList[0].icon == '04d'
+        currentWeather.weather
+        currentWeather.weather[0].main == 'Clouds'
+        currentWeather.weather[0].id == 803
+        currentWeather.weather[0].main == 'Clouds'
+        currentWeather.weather[0].description == 'broken clouds'
+        currentWeather.weather[0].icon == '04d'
         currentWeather.visibility == 10000
         currentWeather.wind.speed == 3.6
         currentWeather.wind.deg == 180

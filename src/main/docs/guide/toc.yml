@@ -7,9 +7,8 @@ gettingStarted:
 writingTheApp:
   title: Writing the Application
   openweather: Open Weather Map   
-  pogos: Parse Response into Groovy classes
+  pogos: Parse Response into JAVA classes
   service: Open Weather Service
-  parse: Parse Response into Groovy Classes
   ersatz: Ersatz
   testapp: Run Tests
   controller: Root Url to Weather Controller
