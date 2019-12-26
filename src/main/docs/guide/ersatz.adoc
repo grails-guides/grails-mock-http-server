@@ -45,4 +45,7 @@ include::{sourcedir}/src/test/groovy/org/openweathermap/OpenweathermapServiceSpe
 <1> Declare a response encoder to convert a `Map` into `application/json` content using an Ersatz-provided encoder.
 <2> Define the response content as a `Map` which will be converted to JSON by the defined encoder (above).
 
-WARNING: As of Ersatz version 1.5.0 the internal Undertow embedded server version is out of sync with Grails. If you use Undertow as your server for Grails you may have classpath collisions or odd errors. This can be avoided by using the "safe" (shadowed) version of the Ersatz dependency (see the http://stehno.com/ersatz/asciidoc/html5/#_shadow_jar[Shadow Jar section of the Ersatz User Guide] for more details).
+http://stehno.com/ersatz/guide/#_shadow_jar[Shadow Jar section of the Ersatz User Guide]:
+___
+The embedded version of Undertow used by Ersatz has caused issues with some server frameworks which also use Undertow (e.g. Grails, and Spring-boot). If you run into errors using the standard jar distribution, please try using the safe distribution, which is a shadowed jar which includes the Undertow library and its JBoss dependencies repackaged in the jar.
+___
