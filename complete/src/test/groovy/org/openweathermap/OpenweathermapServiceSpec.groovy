@@ -5,8 +5,10 @@ import com.stehno.ersatz.ErsatzServer
 import com.stehno.ersatz.cfg.ContentType
 import com.stehno.ersatz.encdec.Encoders
 import grails.testing.services.ServiceUnitTest
+import spock.lang.IgnoreIf
 import spock.lang.Specification
 
+@IgnoreIf( { System.getenv('TRAVIS') as boolean } )
 class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest<OpenweathermapService> {
 //end::classdeclaration[]
 
