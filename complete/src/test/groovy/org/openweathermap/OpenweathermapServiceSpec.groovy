@@ -1,9 +1,9 @@
 //tag::classdeclaration[]
 package org.openweathermap
 
-import com.stehno.ersatz.ContentType
-import com.stehno.ersatz.Encoders
 import com.stehno.ersatz.ErsatzServer
+import com.stehno.ersatz.cfg.ContentType
+import com.stehno.ersatz.encdec.Encoders
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
@@ -18,7 +18,7 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
         String countryCode = 'uk'
         String appid = 'XXXXX'
         ersatz.expectations {
-            get('/data/2.5/weather') { // <1>
+            GET('/data/2.5/weather') { // <1>
                 query('q', "${city},${countryCode}")
                 query('appid', appid)
                 called(1) // <2>
@@ -52,14 +52,14 @@ class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest
         String countryCode = 'uk'
         String appid = 'XXXXX'
         ersatz.expectations {
-            get('/data/2.5/weather') {
+            GET('/data/2.5/weather') {
                 query('q', "${city},${countryCode}")
                 query('appid', appid)
                 called(1)
                 responder {
                     encoder(ContentType.APPLICATION_JSON, Map, Encoders.json) // <1>
                     code(200)
-                    content([
+                    body([
                         coord     : [lon: -0.13, lat: 51.51],
                         weather   : [[id: 803, main: 'Clouds', description: 'broken clouds', icon: '04d']],
                         base      : 'stations',
