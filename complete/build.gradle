@@ -95,8 +95,12 @@ bootRun {
 }
 
 webdriverBinaries {
-    chromedriver '77.0.3865.40'
+    chromedriver {
+        version = '77.0.3865.40'
+        architecture = 'X86'
+    }
     geckodriver '0.24.0'
+
 }
 
 assets {
