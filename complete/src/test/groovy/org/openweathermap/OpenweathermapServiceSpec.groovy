@@ -8,7 +8,7 @@ import grails.testing.services.ServiceUnitTest
 import spock.lang.IgnoreIf
 import spock.lang.Specification
 
-@IgnoreIf( { System.getenv('TRAVIS') as boolean } )
+@IgnoreIf( { System.getenv('CI') as boolean } )
 class OpenweathermapServiceSpec extends Specification implements ServiceUnitTest<OpenweathermapService> {
 //end::classdeclaration[]
 
